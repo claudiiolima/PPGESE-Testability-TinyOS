@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.informatik.hu-berlin.de/top/pnml/ptNetb">
+  <net active="true" id="TinyOS" type="P/T net">
+    <place displayName="true" id="CPUUnit" initialMarking="16" invariant="&lt; inf" name="CPUUnit" nameOffsetX="0" nameOffsetY="0" positionX="488" positionY="501"/>
+    <place displayName="true" id="ExecutingTask" initialMarking="0" invariant="&lt; inf" name="ExecutingTask" nameOffsetX="0" nameOffsetY="0" positionX="488" positionY="591"/>
+    <place displayName="true" id="TaskSuspended" initialMarking="0" invariant="&lt; inf" name="TaskSuspended" nameOffsetX="137" nameOffsetY="22" positionX="658" positionY="441"/>
+    <place displayName="true" id="TaskReady" initialMarking="0" invariant="&lt; inf" name="TaskReady" nameOffsetX="0" nameOffsetY="0" positionX="293" positionY="381"/>
+    <place displayName="true" id="DiskControllerUnit" initialMarking="8" invariant="&lt; inf" name="DiskControllerUnit" nameOffsetX="25" nameOffsetY="55" positionX="473" positionY="291"/>
+    <place displayName="true" id="LoadingMem" initialMarking="0" invariant="&lt; inf" name="LoadingMem" nameOffsetX="0" nameOffsetY="0" positionX="288" positionY="201"/>
+    <place displayName="true" id="TransferToDisk" initialMarking="0" invariant="&lt; inf" name="TransferToDisk" nameOffsetX="127" nameOffsetY="16" positionX="662" positionY="201"/>
+    <place displayName="true" id="TaskOnDisk" initialMarking="16" invariant="&lt; inf" name="TaskOnDisk" nameOffsetX="0" nameOffsetY="0" positionX="473" positionY="51"/>
+    <place displayName="true" id="FreeMemSegment" initialMarking="16" invariant="&lt; inf" name="FreeMemSegment" nameOffsetX="0" nameOffsetY="0" positionX="143" positionY="171"/>
+    <transition angle="90" displayName="true" id="startFirst" infiniteServer="false" name="startFirst" nameOffsetX="0" nameOffsetY="0" player="0" positionX="293" positionY="501" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="suspend" infiniteServer="false" name="suspend" nameOffsetX="0" nameOffsetY="0" player="0" positionX="658" positionY="501" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="startNext" infiniteServer="false" name="startNext" nameOffsetX="0" nameOffsetY="0" player="0" positionX="533" positionY="441" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="endLoading" infiniteServer="false" name="endLoading" nameOffsetX="0" nameOffsetY="0" player="0" positionX="293" positionY="291" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="startUnload" infiniteServer="false" name="startUnload" nameOffsetX="113" nameOffsetY="9" player="0" positionX="658" positionY="291" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="startLoading" infiniteServer="false" name="startLoading" nameOffsetX="0" nameOffsetY="0" player="0" positionX="293" positionY="111" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="endUnload" infiniteServer="false" name="endUnload" nameOffsetX="111" nameOffsetY="11" player="0" positionX="658" positionY="111" priority="0" urgent="false"/>
+    <transition angle="90" displayName="true" id="freeMemory" infiniteServer="false" name="freeMemory" nameOffsetX="0" nameOffsetY="0" player="0" positionX="143" positionY="321" priority="0" urgent="false"/>
+    <arc id="A0" inscription="1" nameOffsetX="0" nameOffsetY="0" source="suspend" target="CPUUnit" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="657" yCoord="516"/>
+      <arcpath arcPointType="false" id="1" xCoord="518" yCoord="516"/>
+    </arc>
+    <arc id="A1" inscription="[0,inf)" nameOffsetX="33" nameOffsetY="-10" source="ExecutingTask" target="suspend" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="517" yCoord="605"/>
+      <arcpath arcPointType="false" id="1" xCoord="680" yCoord="603"/>
+      <arcpath arcPointType="false" id="2" xCoord="672" yCoord="520"/>
+    </arc>
+    <arc id="A2" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="CPUUnit" target="startFirst" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="488" yCoord="516"/>
+      <arcpath arcPointType="false" id="1" xCoord="322" yCoord="516"/>
+    </arc>
+    <arc id="A3" inscription="1" nameOffsetX="0" nameOffsetY="0" source="startFirst" target="ExecutingTask" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="307" yCoord="520"/>
+      <arcpath arcPointType="false" id="1" xCoord="325" yCoord="603"/>
+      <arcpath arcPointType="false" id="2" xCoord="488" yCoord="605"/>
+    </arc>
+    <arc id="A4" inscription="[0,inf)" nameOffsetX="2" nameOffsetY="-5" source="CPUUnit" target="startNext" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="512" yCoord="504"/>
+      <arcpath arcPointType="false" id="1" xCoord="547" yCoord="460"/>
+    </arc>
+    <arc id="A5" inscription="1" nameOffsetX="0" nameOffsetY="0" source="startNext" target="ExecutingTask" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="552" yCoord="461"/>
+      <arcpath arcPointType="false" id="1" xCoord="565" yCoord="580"/>
+      <arcpath arcPointType="false" id="2" xCoord="516" yCoord="600"/>
+    </arc>
+    <arc id="A6" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TaskSuspended" target="startNext" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="658" yCoord="456"/>
+      <arcpath arcPointType="false" id="1" xCoord="562" yCoord="456"/>
+    </arc>
+    <arc id="A7" inscription="1" nameOffsetX="0" nameOffsetY="0" source="suspend" target="TaskSuspended" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="672" yCoord="510"/>
+      <arcpath arcPointType="false" id="1" xCoord="672" yCoord="470"/>
+    </arc>
+    <arc id="A8" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endLoading" target="DiskControllerUnit" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="322" yCoord="306"/>
+      <arcpath arcPointType="false" id="1" xCoord="473" yCoord="306"/>
+    </arc>
+    <arc id="A9" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="DiskControllerUnit" target="startUnload" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="503" yCoord="306"/>
+      <arcpath arcPointType="false" id="1" xCoord="657" yCoord="306"/>
+    </arc>
+    <arc id="A10" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TaskSuspended" target="startUnload" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="672" yCoord="441"/>
+      <arcpath arcPointType="false" id="1" xCoord="672" yCoord="310"/>
+    </arc>
+    <arc id="A11" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TaskReady" target="startFirst" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="307" yCoord="410"/>
+      <arcpath arcPointType="false" id="1" xCoord="307" yCoord="510"/>
+    </arc>
+    <arc id="A12" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endLoading" target="TaskReady" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="307" yCoord="310"/>
+      <arcpath arcPointType="false" id="1" xCoord="307" yCoord="381"/>
+    </arc>
+    <arc id="A13" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TaskReady" target="freeMemory" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="293" yCoord="396"/>
+      <arcpath arcPointType="false" id="1" xCoord="170" yCoord="403"/>
+      <arcpath arcPointType="false" id="2" xCoord="157" yCoord="340"/>
+    </arc>
+    <arc id="A14" inscription="1" nameOffsetX="0" nameOffsetY="0" source="freeMemory" target="FreeMemSegment" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="157" yCoord="330"/>
+      <arcpath arcPointType="false" id="1" xCoord="157" yCoord="200"/>
+    </arc>
+    <arc id="A15" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="FreeMemSegment" target="startLoading" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="163" yCoord="172"/>
+      <arcpath arcPointType="false" id="1" xCoord="175" yCoord="144"/>
+      <arcpath arcPointType="false" id="2" xCoord="292" yCoord="126"/>
+    </arc>
+    <arc id="A17" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="LoadingMem" target="endLoading" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="302" yCoord="230"/>
+      <arcpath arcPointType="false" id="1" xCoord="302" yCoord="300"/>
+    </arc>
+    <arc id="A19" inscription="[0,inf)" nameOffsetX="-18" nameOffsetY="-10" source="TaskOnDisk" target="startLoading" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="473" yCoord="67"/>
+      <arcpath arcPointType="false" id="1" xCoord="325" yCoord="83"/>
+      <arcpath arcPointType="false" id="2" xCoord="307" yCoord="120"/>
+    </arc>
+    <arc id="A20" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endUnload" target="TaskOnDisk" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="672" yCoord="120"/>
+      <arcpath arcPointType="false" id="1" xCoord="675" yCoord="83"/>
+      <arcpath arcPointType="false" id="2" xCoord="502" yCoord="67"/>
+    </arc>
+    <arc id="A21" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TransferToDisk" target="endUnload" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="677" yCoord="201"/>
+      <arcpath arcPointType="false" id="1" xCoord="677" yCoord="131"/>
+    </arc>
+    <arc id="A22" inscription="1" nameOffsetX="0" nameOffsetY="0" source="startUnload" target="TransferToDisk" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="677" yCoord="301"/>
+      <arcpath arcPointType="false" id="1" xCoord="677" yCoord="231"/>
+    </arc>
+    <arc id="A23" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endUnload" target="DiskControllerUnit" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="667" yCoord="130"/>
+      <arcpath arcPointType="false" id="1" xCoord="498" yCoord="295"/>
+    </arc>
+    <arc id="A24" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endLoading" target="TaskOnDisk" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="312" yCoord="301"/>
+      <arcpath arcPointType="false" id="1" xCoord="479" yCoord="78"/>
+    </arc>
+    <arc id="A25" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="TaskOnDisk" target="startUnload" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="497" yCoord="77"/>
+      <arcpath arcPointType="false" id="1" xCoord="672" yCoord="300"/>
+    </arc>
+    <arc id="A26" inscription="1" nameOffsetX="0" nameOffsetY="0" source="endUnload" target="TaskReady" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="667" yCoord="130"/>
+      <arcpath arcPointType="false" id="1" xCoord="555" yCoord="403"/>
+      <arcpath arcPointType="false" id="2" xCoord="322" yCoord="396"/>
+    </arc>
+    <arc id="A27" inscription="1" nameOffsetX="0" nameOffsetY="0" source="startLoading" target="LoadingMem" type="normal" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="302" yCoord="130"/>
+      <arcpath arcPointType="false" id="1" xCoord="302" yCoord="201"/>
+    </arc>
+    <arc id="A28" inscription="[0,inf)" nameOffsetX="0" nameOffsetY="0" source="DiskControllerUnit" target="startLoading" type="timed" weight="1">
+      <arcpath arcPointType="false" id="0" xCoord="477" yCoord="295"/>
+      <arcpath arcPointType="false" id="1" xCoord="307" yCoord="130"/>
+    </arc>
+  </net>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="CPUUnit is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.CPUUnit</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="Deadlock absence" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <negation>
+            <deadlock/>
+          </negation>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="DiskControllerUnit is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.DiskControllerUnit</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="ExecutingTask is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.ExecutingTask</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="FreeMemSegment is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.FreeMemSegment</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="LoadingMem is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.LoadingMem</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="TaskOnDisk is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.TaskOnDisk</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="TaskReady is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.TaskReady</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="TaskSuspended is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.TaskSuspended</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <query active="true" algorithmOption="CERTAIN_ZERO" approximationDenominator="0" capacity="0" discreteInclusion="false" enableOverApproximation="false" enableUnderApproximation="false" extrapolationOption="AUTOMATIC" gcd="false" hashTableSize="MB_16" inclusionPlaces="*NONE*" name="TaskToDisk is always reachable" overApproximation="false" pTrie="false" reduction="true" reductionOption="VerifyPN" searchOption="HEURISTIC" symmetry="false" timeDarts="false" traceOption="NONE" type="CTL" useQueryReduction="true" useSiphonTrapAnalysis="false" useStubbornReduction="true" useTarOption="false" useTarjan="true">
+    <formula>
+      <all-paths>
+        <finally>
+          <exists-path>
+            <finally>
+              <integer-ne>
+                <tokens-count>
+                  <place>TinyOS.TransferToDisk</place>
+                </tokens-count>
+                <integer-constant>0</integer-constant>
+              </integer-ne>
+            </finally>
+          </exists-path>
+        </finally>
+      </all-paths>
+    </formula>
+  </query>
+  <k-bound bound="3"/>
+  <feature isGame="false" isTimed="false"/>
+</pnml>
