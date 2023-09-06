@@ -26,15 +26,15 @@ Para mais informações da ferramenta [documentação](https://www.tapaal.net/do
 ### Verificação
 
 * $AG~!(deadlock)$
-* $AF~(EF~CPUUnit~\neq~0)$
-* $AF~(EF~DiskControllerUnit~\neq~0)$
-* $AF~(EF~ExecutingTask~\neq~0)$
-* $AF~(EF~FreeMemSegment~\neq~0)$
-* $AF~(EF~LoadingMem~\neq~0)$
-* $AF~(EF~TaskOnDisk~\neq~0)$
-* $AF~(EF~TaskReady~\neq~0)$
-* $AF~(EF~TaskSuspended~\neq~0)$
-* $AF~(EF~TransferToDisk~\neq~0)$
+* $AF~(EF CPUUnit \neq 0)$
+* $AF~(EF DiskControllerUnit \neq 0)$
+* $AF~(EF ExecutingTask \neq 0)$
+* $AF~(EF FreeMemSegment \neq 0)$
+* $AF~(EF LoadingMem \neq 0)$
+* $AF~(EF TaskOnDisk \neq 0)$
+* $AF~(EF TaskReady \neq 0)$
+* $AF~(EF TaskSuspended \neq 0)$
+* $AF~(EF TransferToDisk \neq 0)$
 
 ### Resultados
 
