@@ -1,0 +1,10 @@
+Query;Result;Verification Time;Query Property
+Deadlock absence;Satisfied;0.072 s;AF !(deadlock)
+DiskControllerUnit is always reachable;Satisfied;0.063 s;AF (EF TinyOS.DiskControllerUnit != 0)
+ExecutingTask is always reachable;Satisfied;0.068 s;AF (EF TinyOS.ExecutingTask != 0)
+FreeMemSegment is always reachable;Satisfied;0.056 s;AF (EF TinyOS.FreeMemSegment != 0)
+LoadingMem is always reachable;Satisfied;0.066 s;AF (EF TinyOS.LoadingMem != 0)
+TaskOnDisk is always reachable;Satisfied;0.055 s;AF (EF TinyOS.TaskOnDisk != 0)
+TaskReady is always reachable;Satisfied;0.065 s;AF (EF TinyOS.TaskReady != 0)
+TaskSuspended is always reachable;Satisfied;0.059 s;AF (EF TinyOS.TaskSuspended != 0)
+TaskToDisk is always reachable;Satisfied;0.062 s;AF (EF TinyOS.TransferToDisk != 0)
